@@ -22,7 +22,7 @@ const Home = () => {
       }
 
       const email = user.email;
-      const res = await axios.get(`http://localhost:5000/getTasks?email=${email}`);
+      const res = await axios.get(`http://localhost:5000/getTasks?email=${email}`); // https://track-note-ecru.vercel.app
       const fetchedTasks = res.data;
       return {
         todo: fetchedTasks.filter((task) => task.category === "todo"),
@@ -234,10 +234,10 @@ const Home = () => {
               <option value="in-progress">In Progress</option>
               <option value="done">Done</option>
             </select>
-            <div className="flex justify-between font-medium mt-5">
+            <div className="flex justify-between gap-3 font-medium mt-5">
               <button
                 onClick={closeModal}
-                className="mr-2 px-3 py-1.5 bg-gray-200 hover:bg-gray-300 border border-gray-400 rounded-lg"
+                className="px-3 py-1.5 bg-gray-200 hover:bg-gray-300 border border-gray-400 rounded-lg"
               >
                 Cancel
               </button>
