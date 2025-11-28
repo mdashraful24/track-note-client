@@ -8,7 +8,7 @@ const Login = () => {
   const handleGoogleLogin = async () => {
     try {
       await signInWithGoogle().then(async (res) => {
-        console.log(res.user);
+        // console.log(res.user);
         if (res.user) {
           const userData = {
             uid: res.user.uid,
@@ -16,7 +16,7 @@ const Login = () => {
             name: res.user.displayName,
           };
 
-          console.log(userData);
+          // console.log(userData);
 
           // Send user data to the backend
           try {
@@ -45,7 +45,7 @@ const Login = () => {
             Welcome to NoteTracker
           </h1>
           <p className="text-gray-600 max-w-md">
-            Your ideas, organized with clarity. Sign in to begin capturing your thoughts.
+            Manage or track your notes. Sign in to begin tracking your notes.
           </p>
         </div>
 
