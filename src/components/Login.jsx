@@ -5,10 +5,10 @@ import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
   const { user, signInWithGoogle } = useContext(AuthContext);
+
   const handleGoogleLogin = async () => {
     try {
       await signInWithGoogle().then(async (res) => {
-        // console.log(res.user);
         if (res.user) {
           const userData = {
             uid: res.user.uid,
@@ -16,16 +16,18 @@ const Login = () => {
             name: res.user.displayName,
           };
 
-          // console.log(userData);
-
           // Send user data to the backend
           try {
             const response = await axios.post(
-              "http://localhost:5000/users",
+              "https://track-note-ecru.vercel.app/users",
               userData
             );
             console.log("Server response:", response.data);
             alert("Login successful!");
+
+            // Reload the page after successful login
+            window.location.reload();
+
           } catch (err) {
             console.error("Error sending user data to backend:", err);
           }
@@ -57,7 +59,7 @@ const Login = () => {
           <span
             className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-out pointer-events-none"
           />
-          <FcGoogle size={20} className="bg-white rounded-full"/>
+          <FcGoogle size={20} className="bg-white rounded-full" />
           <span className="font-medium">Sign in with Google</span>
         </button>
       </div>
