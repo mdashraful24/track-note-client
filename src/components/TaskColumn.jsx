@@ -13,7 +13,7 @@ const TaskColumn = ({ title, tasks, droppableId, openModal, refetch }) => {
   const [selectedTask, setSelectedTask] = useState(null);
 
   const handleDelete = async (id) => {
-    const res = await axios.delete(`http://localhost:5000/deleteTask/${id}`);
+    const res = await axios.delete(`https://track-note-ecru.vercel.app/deleteTask/${id}`);
     if (res.data.deletedCount > 0) {
       refetch(); // Fetch the updated task list
       toast.success("Deleted Successfully");

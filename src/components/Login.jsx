@@ -19,7 +19,7 @@ const Login = () => {
           // Send user data to the backend
           try {
             const response = await axios.post(
-              "http://localhost:5000/users",
+              "https://track-note-ecru.vercel.app/users",
               userData
             );
             // console.log("Server response:", response.data);

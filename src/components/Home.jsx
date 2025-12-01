@@ -22,8 +22,8 @@ const Home = () => {
       }
 
       const email = user.email;
-      const res = await axios.get(`http://localhost:5000/getTasks?email=${email}`);
-      // https://track-note-ecru.vercel.app
+      const res = await axios.get(`https://track-note-ecru.vercel.app/getTasks?email=${email}`);
+      // http://localhost:5000
       const fetchedTasks = res.data;
       return {
         todo: fetchedTasks.filter((task) => task.category === "todo"),
@@ -44,7 +44,7 @@ const Home = () => {
         email: user.email,
       };
       const res = await axios.post(
-        "http://localhost:5000/addTask",
+        "https://track-note-ecru.vercel.app/addTask",
         taskWithUserEmail
       );
       return res.data.task;
@@ -60,7 +60,7 @@ const Home = () => {
   // Mutation for updating task category
   const updateTaskMutation = useMutation({
     mutationFn: async ({ taskId, category }) => {
-      await axios.patch(`http://localhost:5000/updateTask/${taskId}`, {
+      await axios.patch(`https://track-note-ecru.vercel.app/updateTask/${taskId}`, {
         category,
       });
     },
@@ -107,7 +107,7 @@ const Home = () => {
       }));
 
       axios
-        .patch("http://localhost:5000/updateTaskOrder", {
+        .patch("https://track-note-ecru.vercel.app/updateTaskOrder", {
           tasks: updatedTaskOrder, // Send updated task orders
         })
         .catch(() => {
