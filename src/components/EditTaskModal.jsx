@@ -37,7 +37,7 @@ const EditTaskModal = ({ isOpen, onClose, task, refetch }) => {
         }
 
         try {
-            const res = await axios.put(`https://track-note-ecru.vercel.app/updateTask/${task._id}`, formData);
+            const res = await axios.put(`http://localhost:5000/updateTask/${task._id}`, formData);
 
             if (res.status === 200) {
                 toast.success("Task updated successfully");

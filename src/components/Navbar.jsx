@@ -8,7 +8,7 @@ export default function Navbar() {
   return (
     <nav className="bg-gray-900 text-white p-3 flex justify-between items-center">
       {/* Company Name */}
-      <div className="text-xl font-bold cursor-none">TrackNote</div>
+      <div className="text-xl font-bold cursor-none">FlowNotes</div>
 
       {/* User Section */}
       <div className="flex items-center gap-4">

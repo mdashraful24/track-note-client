@@ -1,16 +1,16 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { DragDropContext, } from "@hello-pangea/dnd";
 import { Toaster, toast } from "react-hot-toast";
-
 import axios from "axios";
 import Navbar from "./Navbar";
 import Login from "./Login";
-import { AuthContext } from "../Provider/AuthProvider";
 import TaskColumn from "./TaskColumn";
+import useAuth from "./useAuth";
+import Loading from "./Loading";
 
 const Home = () => {
-  const { user, loading } = useContext(AuthContext);
+  const { user, loading } = useAuth();
   const queryClient = useQueryClient();
 
   const { data: tasks = { todo: [], "in-progress": [], done: [] }, refetch, isLoading } = useQuery({
@@ -22,7 +22,7 @@ const Home = () => {
       }
 
       const email = user.email;
-      const res = await axios.get(`https://track-note-ecru.vercel.app/getTasks?email=${email}`);
+      const res = await axios.get(`http://localhost:5000/getTasks?email=${email}`);
       // https://track-note-ecru.vercel.app
       const fetchedTasks = res.data;
       return {
@@ -44,7 +44,7 @@ const Home = () => {
         email: user.email,
       };
       const res = await axios.post(
-        "https://track-note-ecru.vercel.app/addTask",
+        "http://localhost:5000/addTask",
         taskWithUserEmail
       );
       return res.data.task;
@@ -60,7 +60,7 @@ const Home = () => {
   // Mutation for updating task category
   const updateTaskMutation = useMutation({
     mutationFn: async ({ taskId, category }) => {
-      await axios.patch(`https://track-note-ecru.vercel.app/updateTask/${taskId}`, {
+      await axios.patch(`http://localhost:5000/updateTask/${taskId}`, {
         category,
       });
     },
@@ -107,7 +107,7 @@ const Home = () => {
       }));
 
       axios
-        .patch("https://track-note-ecru.vercel.app/updateTaskOrder", {
+        .patch("http://localhost:5000/updateTaskOrder", {
           tasks: updatedTaskOrder, // Send updated task orders
         })
         .catch(() => {
@@ -163,9 +163,7 @@ const Home = () => {
 
   if (isLoading || loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="w-16 h-16 border-4 border-t-4 border-blue-600 border-solid rounded-full animate-spin"></div>
-      </div>
+      <Loading />
     );
   }
 
@@ -173,7 +171,7 @@ const Home = () => {
     <div className="min-h-screen container mx-auto p-4 lg:p-8">
       <Toaster position="top-right" />
       <Navbar />
-      <h1 className="text-3xl text-center font-bold pt-4 pb-6">Track Your Note</h1>
+      <h1 className="text-3xl text-center font-bold pt-4 pb-6">Take & Manage Your Notes</h1>
 
       {user && (
         <DragDropContext onDragEnd={onDragEnd}>

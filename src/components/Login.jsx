@@ -19,10 +19,10 @@ const Login = () => {
           // Send user data to the backend
           try {
             const response = await axios.post(
-              "https://track-note-ecru.vercel.app/users",
+              "http://localhost:5000/users",
               userData
             );
-            console.log("Server response:", response.data);
+            // console.log("Server response:", response.data);
             alert("Login successful!");
 
             // Reload the page after successful login
@@ -44,10 +44,10 @@ const Login = () => {
 
         <div className="flex flex-col items-center text-center space-y-2">
           <h1 className="text-3xl font-semibold tracking-tight">
-            Welcome to NoteTracker
+            Welcome to TakeNote
           </h1>
-          <p className="text-gray-600 max-w-md">
-            Manage or track your notes. Sign in to begin tracking your notes.
+          <p>
+            Take & manage your notes. Sign in to begin tracking your notes.
           </p>
         </div>
 
