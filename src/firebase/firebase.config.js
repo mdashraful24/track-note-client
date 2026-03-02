@@ -26,10 +26,10 @@ import { browserLocalPersistence, setPersistence } from "firebase/auth";
 
 setPersistence(auth, browserLocalPersistence)
   .then(() => {
-    console.log("Auth persistence set to local");
+    // console.log("Auth persistence set to local");
   })
   .catch((error) => {
-    console.error("Error setting auth persistence:", error);
+    // console.error("Error setting auth persistence:", error);
   });
 
 export default auth;
